@@ -11,6 +11,7 @@ module SwiftypeAppSearch
     autoload :Search, 'swiftype-app-search/client/search'
     autoload :QuerySuggestion, 'swiftype-app-search/client/query_suggestion'
     autoload :SearchSettings, 'swiftype-app-search/client/search_settings'
+    autoload :Schema, 'swiftype-app-search/client/schema'
 
     DEFAULT_TIMEOUT = 15
 
@@ -61,5 +62,6 @@ module SwiftypeAppSearch
     include SwiftypeAppSearch::Client::SignedSearchOptions
     include SwiftypeAppSearch::Client::QuerySuggestion
     include SwiftypeAppSearch::Client::SearchSettings
+    include SwiftypeAppSearch::Client::Schema
   end
 end

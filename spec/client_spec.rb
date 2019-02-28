@@ -414,6 +414,42 @@ describe SwiftypeAppSearch::Client do
     end
   end
 
+  context 'Schema' do
+    let(:default_schema) { { } }
+
+    let(:updated_schema) { {
+      "rating" => "number"
+    } }
+
+    before(:each) do
+      client.create_engine(engine_name) rescue SwiftypeAppSearch::BadRequest
+    end
+
+    after(:each) do
+      client.destroy_engine(engine_name) rescue SwiftypeAppSearch::NonExistentRecord
+    end
+
+    describe '#list_schema' do
+      subject { client.list_schema(engine_name) }
+
+      it 'should return default schema' do
+        expect(subject).to match(default_schema)
+      end
+    end
+
+    describe '#update_schema' do
+      subject { client.list_schema(engine_name) }
+
+      before do
+        client.update_schema(engine_name, { "rating" => "number" })
+      end
+
+      it 'should update schema' do
+        expect(subject).to match(updated_schema)
+      end
+    end
+  end
+
   context 'Engines' do
     after do
       client.destroy_engine(engine_name) rescue SwiftypeAppSearch::NonExistentRecord
